@@ -1,4 +1,2 @@
 ﻿  ADT.cpp
-c:\projects\carol\adt\adt\adt.cpp(100): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-c:\projects\carol\adt\adt\adt.cpp(136): warning C4305: 'argument': truncation from 'double' to 'float'
   ADT.vcxproj -> C:\projects\Carol\ADT\Debug\ADT.exe
