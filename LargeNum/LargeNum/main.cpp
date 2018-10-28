@@ -20,12 +20,12 @@ struct LongInt
     void Init(int num){ //利用亂數產生一個長度小於 num 的值
         int x ;
         IsPositive = true ;
-        srand( time(NULL) );
+        srand( time(NULL) );  // 設定時間為亂數種子。每次都會不一樣喔
         for (int index = MAX - 1 , i = num  ; index >= 0 , i > 0 ; index -- , i -- ){
             
             /* 產生亂數 */
             x = rand();
-            MyInt[index] = x % 10 ;
+            MyInt[index] = x % 10 ; // 只拿個位數 (/10 ㄋ的餘數)
         }
     }
     
@@ -46,7 +46,7 @@ struct LongInt
         
     } //將本身的陣列初始為 0
     
-    int Compare(LongInt b){//何者較大，若大於 b 則回傳 1，反之，則回傳-1
+    int Compare(LongInt b){//何者較大，若大於 b 則回傳 1，反之，則回傳-1 沒考慮正負
         for ( int index = 0 ; index < MAX ; index ++ ){
             if ( MyInt[index] > b.MyInt[index] )
                 return 1 ;
@@ -56,7 +56,7 @@ struct LongInt
         return 0 ;
     }//比較本身跟長整數 b 之間
     
-    LongInt Add(LongInt b ){
+    LongInt Add(LongInt b ){  //  相加函數。沒有考慮正負喔
         int carry = 0 ;
         LongInt temp = LongInt(),tempa,tempb;
         tempa = *this ;
@@ -122,7 +122,7 @@ struct LongInt
         
         for (int index = MAX - 1 ; index >=0 ; index -- ){
             for ( int times = tempb.MyInt[index] ; times > 0 ; times -- ){
-                temp = temp + tempa ;
+                temp = temp + tempa ; // 乘幾就是加幾次  9 * 3 = 9 + 9 + 9
             }
             tempa.shift(1);
         }
@@ -163,11 +163,11 @@ int main(int argc, const char * argv[]) {
     a =  12345 ;
     b =  54321 ;
     //a.shift(2);
-    cout << " 乘數：" ;
+    cout << "  乘數：" ;
     a.Show() ;
     cout << "被乘數：" ;
     b.Show();
-    cout << " 結果：" ;
+    cout << "  結果：" ;
     a.Multi(b).Show();
     return 0;
 }
