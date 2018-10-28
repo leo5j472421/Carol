@@ -2,8 +2,8 @@
 //  main.cpp
 //  LargeNum
 //
-//  Created by Leo Chu Ming on 2018/10/26.
-//  Copyright © 2018 Leo Chu Ming. All rights reserved.
+//  Created by Carol on 2018/10/26.
+//  Copyright © 2018 Carol. All rights reserved.
 //
 #include <iostream>
 #include <string>
@@ -15,10 +15,11 @@ using namespace std;
 struct LongInt
 {
     int MyInt[MAX];
-    int IntLen;
+    int IntLen;  // 沒在用的拉
     bool IsPositive= true ;
     void Init(int num){ //利用亂數產生一個長度小於 num 的值
         int x ;
+        IsPositive = true ;
         srand( time(NULL) );
         for (int index = MAX - 1 , i = num  ; index >= 0 , i > 0 ; index -- , i -- ){
             
@@ -27,15 +28,16 @@ struct LongInt
             MyInt[index] = x % 10 ;
         }
     }
-    void operator = (int num){
-        Zero();
+    
+    void operator = (int num){  // Assign num
+        Zero();                 //運算子多載
         if (num < 0)
             IsPositive = false ;
         for ( int index = MAX - 1  ; index >= 0  && num != 0 ; index -- ){
-            MyInt[index] = abs(num) % 10 ;
+            MyInt[index] = abs(num) % 10 ;   // abs() 絕對值
             num /= 10 ;
         }
-    } //運算子多載
+    }
     
     void Zero(){ //將本身的陣列初始為 0
        
@@ -69,10 +71,11 @@ struct LongInt
         
     }
     
-    LongInt operator + (LongInt b ){
+    LongInt operator + (LongInt b ){//運算子多載
         return Add(b);
-    } //運算子多載
-    LongInt Sub(LongInt b){
+    }
+    
+    LongInt Sub(LongInt b){ // 相減 輸入視為正數
         LongInt tmp,tmpa,tmpb;
         int i;
         if(Compare(b)==1){
@@ -86,10 +89,13 @@ struct LongInt
             tmpa=b;
             tmpb=*this;
         }
-        for(i=0;i<MAX;i++){
+        
+        
+        for(i=0;i<MAX;i++){ // 每位依次相減
             tmp.MyInt[i] = tmpa.MyInt[i] - tmpb.MyInt[i];
         }
-        for(i=MAX-1;i;i--){
+        
+        for(i=MAX-1;i;i--){ // 補位
             if(tmp.MyInt[i] < 0)
             {
                 tmp.MyInt[i]+=10;
@@ -101,13 +107,14 @@ struct LongInt
         return Sub(b);
     }; //運算子多載
     
-    void shift (int num){
+    void shift (int num){ // 向右位移 num 格  ex  (LongInt)1234.shift(2) == (LongInt)123400
         for (int index = num  ; index < MAX ; index ++ )
             MyInt[index-num] = MyInt[index] ;
         for (int index = MAX - 1 , times = num ; times > 0 && index >= 0 ; index -- ,times -- )
             MyInt[index]  = 0 ;
     }
-    LongInt Multi(LongInt b ){
+    
+    LongInt Multi(LongInt b ){ // 相乘 最大20位 有考慮正負
         LongInt temp = LongInt(),tempa,tempb;
         tempa = *this ;
         tempb = b ;
@@ -119,9 +126,11 @@ struct LongInt
             }
             tempa.shift(1);
         }
-        temp.IsPositive = !(tempa.IsPositive^tempb.IsPositive);
+        temp.IsPositive = !(tempa.IsPositive^tempb.IsPositive); // NXOR  (1,1)->1 (1,0)->0 (0,1)->0 (0,0)->1。 ＾-> XOR
         return temp ;
     }
+    
+    
     void Show(){
         if (IsPositive)
             cout << "+" ;
@@ -149,7 +158,7 @@ struct LongInt
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    std::cout << "Hello, World!\n";
+    std::cout << "Hello, Carol!\n";
     LongInt a = LongInt(),b = LongInt();
     a =  12345 ;
     b =  54321 ;
