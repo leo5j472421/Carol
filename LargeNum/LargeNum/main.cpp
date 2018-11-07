@@ -155,10 +155,21 @@ struct LongInt
     }
     
 };
- 
+
+void PrintSelect(){
+    cout << "*----------------------------------------------*" << endl ;
+    cout << "*               請選擇功能噢喔                    *" << endl ;
+    cout << "* 1. 相加                                       *" << endl ;
+    cout << "* 2. 相減                                       *" << endl ;
+    cout << "* 3. 相乘                                       *" << endl ;
+    cout << "* 4. 退出                                       *" << endl ;
+    cout << "*----------------------------------------------*" << endl ;
+}
+
+
 int main(int argc, const char * argv[]) {
     // insert code here...
-    std::cout << "Hello, Carol!\n";
+    PrintSelect();
     LongInt a = LongInt(),b = LongInt();
     a =  12345 ;
     b =  54321 ;
