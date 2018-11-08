@@ -20,7 +20,6 @@ struct LongInt
     void Init(int num){ //利用亂數產生一個長度小於 num 的值
         int x ;
         IsPositive = true ;
-        srand( time(NULL) );  // 設定時間為亂數種子。每次都會不一樣喔
         for (int index = MAX - 1 , i = num  ; index >= 0 , i > 0 ; index -- , i -- ){
             
             /* 產生亂數 */
@@ -145,7 +144,6 @@ struct LongInt
     
     void Init() { //利用亂數產生一個長度小於 19 的值
         int x ;
-        srand( time(NULL) );
         for (int index = 0 ; index < MAX ; index ++ ){
             
             /* 產生亂數 */
@@ -162,23 +160,59 @@ void PrintSelect(){
     cout << "* 1. 相加                                       *" << endl ;
     cout << "* 2. 相減                                       *" << endl ;
     cout << "* 3. 相乘                                       *" << endl ;
-    cout << "* 4. 退出                                       *" << endl ;
+    cout << "* 4. 亂數產生數字                                 *" << endl ;
+    cout << "* 5. 退出                                       *" << endl ;
     cout << "*----------------------------------------------*" << endl ;
 }
 
 
 int main(int argc, const char * argv[]) {
     // insert code here...
+    srand( time(NULL) );  // 設定時間為亂數種子。每次都會不一樣喔
     PrintSelect();
     LongInt a = LongInt(),b = LongInt();
     a =  12345 ;
     b =  54321 ;
     //a.shift(2);
-    cout << "  乘數：" ;
-    a.Show() ;
-    cout << "被乘數：" ;
-    b.Show();
-    cout << "  結果：" ;
-    a.Multi(b).Show();
+    int option ;
+    cout << "請輸入選項" << endl ;
+    cin >> option ;
+    while (option != 5 ){
+        if ( option == 1 ){
+            cout << "  加數：" ;
+            a.Show() ;
+            cout << "被加數：" ;
+            b.Show();
+            cout << "  結果：" ;
+            a.Add(b).Show();
+        } else if ( option == 2 ){
+            cout << "  減數：" ;
+            a.Show() ;
+            cout << "被減數：" ;
+            b.Show();
+            cout << "  結果：" ;
+            a.Sub(b).Show();
+            
+        } else if ( option == 3 ){
+            cout << "  乘數：" ;
+            a.Show() ;
+            cout << "被乘數：" ;
+            b.Show();
+            cout << "  結果：" ;
+            a.Multi(b).Show();
+        } else if (option == 4 ){
+            a.Init();
+            b.Init();
+            cout << "a : " ;
+            a.Show();
+            cout << "b : " ;
+            b.Show();
+        }
+        cout << "請輸入選項" << endl ;
+        cin >> option ;
+        
+    }
+    
+    
     return 0;
 }
